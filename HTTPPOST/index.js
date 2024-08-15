@@ -38,14 +38,8 @@ const server = http.createServer((req, res) => {
           const getdatafromdb = JSON.parse(data);
           // console.log(getdatafromdb.product);
           getdatafromdb.product.push(JSON.parse(str));
-          // console.log(getdatafromdb);
-          fs.writeFile("./db.json", JSON.stringify(getdatafromdb), (err) => {
-            if (err) {
-              res.end(err);
-            } else {
-              res.end("product added");
-            }
-          });
+          console.log(getdatafromdb);
+
           res.end();
         }
       });
