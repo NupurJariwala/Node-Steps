@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+
 const baseurl = "http://localhost:8080";
 const UpdateNotes = () => {
   const [subject, setsubject] = useState("");
   const [description, setdescription] = useState("");
-  const { notesId } = useParams();
+  const id = { _id };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .patch(
-        `${baseurl}/notes/update/${notesId}`,
+        `${baseurl}/notes/update/${id}`,
         { subject, description },
         { withCredentials: true }
       )
