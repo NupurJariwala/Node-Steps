@@ -55,7 +55,7 @@ const user_update_controller = async (req, res) => {
 };
 
 const user_notes_controller = async (req, res) => {
-  const userid = req.user._id;
+  const userid = req.user?._id;
 
   try {
     const data = await NotesModel.find({ userId: userid });
