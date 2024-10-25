@@ -3,17 +3,17 @@ const app = express();
 const dotenv = require("dotenv");
 const connection = require("./db");
 const cors = require("cors");
-
+const BlogsRouter = require("./Routes/BlogRoutes");
 // const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
 app.set("view engine", "ejs");
-// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 // app.use(cookieParser());
-app.use("/user", UserRouter);
-app.use("/blogs", blogsRouter);
+// app.use("/user", UserRouter);
+app.use("/blogs", BlogsRouter);
 app.listen(process.env.PORT || 3000, async () => {
   try {
     await connection;
