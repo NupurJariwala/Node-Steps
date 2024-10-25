@@ -18,7 +18,11 @@ const BlogForm = () => {
       )
       .then((res) => {
         alert(res.data.message);
-        console.log(res.data.message);
+        // console.log(res.data);
+        settitle("");
+        setauthor("");
+        setcontent("");
+        settags([]);
 
         // console.log(res.data);
       })

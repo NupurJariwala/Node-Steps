@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-const baseurl = "http://localhost:8080";
+
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardText,
+  CardTitle,
+  Col,
+  Row,
+} from "react-bootstrap";
+
 const BlogList = () => {
-  const [blogs, setBlogs] = useState([]);
-  console.log(blogs);
+  const [data, setdata] = useState([]);
+  // console.log(data);
 
   const getblogfromdb = () => {
-    axios
-      .get(`${baseurl}/blogs`, {
-        withCredentials: true,
-      })
+    axios 
+      .get("http://localhost:8080/blogs/allblogs")
       .then((res) => {
-        setBlogs(res.data.notes);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -21,18 +28,30 @@ const BlogList = () => {
 
   useEffect(() => {
     getblogfromdb;
-  }, []);
+  }, [data]);
 
   return (
-    <div>
-      <h1>Blog List</h1>
-      {blogs.map((blog) => (
-        <div key={blog._id}>
-          <h2>{blog.title}</h2>
-          <p>{blog.content.substring(0, 100)}...</p>
-          <Link to={`/blogs/${blog._id}`}>Read More</Link>
-        </div>
-      ))}
+    <div className="container mt-5">
+      <Row>
+        {data.map((blogs) => (
+          <Col key={blogs._id} md={4} className="mb-4">
+            <Card>
+              <CardBody>
+                <CardTitle>Name : {blogs.title}</CardTitle>
+                <CardText>Author : {blogs.author}</CardText>
+                <CardText>Content : {blogs.content}</CardText>
+                <CardText>#Tags : {blogs.tags}</CardText>
+                <CardText>PublishedDate : {blogs.publishedDate}</CardText>
+                <CardText>{blogs.publishedDate}</CardText>
+              </CardBody>
+
+              <CardFooter>
+                <small className="text-muted"> by {blogs.userName}</small>
+              </CardFooter>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </div>
   );
 };

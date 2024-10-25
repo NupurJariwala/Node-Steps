@@ -8,7 +8,7 @@ function navigation() {
         <Container>
           <Navbar.Brand>Blogs</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">BlogList</Nav.Link>
+            <Nav.Link href="/allbogs">BlogList</Nav.Link>
             <Nav.Link href="/create">BlogCreate</Nav.Link>
             <Nav.Link href="/details">BlogDetails</Nav.Link>
           </Nav>

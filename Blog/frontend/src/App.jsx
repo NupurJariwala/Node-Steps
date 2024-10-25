@@ -8,10 +8,9 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<BlogList />} />
         <Route path="/create" element={<BlogForm />} />
         <Route path="/details" element={<BlogDetails />} />
-        {/* <Route path="/posts/:id" element={<BlogDetails />} /> */}
+        <Route path="/allbogs" element={<BlogList />} />
       </Routes>
     </div>
   );
