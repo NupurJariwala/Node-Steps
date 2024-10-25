@@ -14,12 +14,13 @@ const createBlog = async (req, res) => {
       content,
       tags,
       userId: req.user?._id,
+      userName: req.user?.name,
     });
 
     // res.send("ok");
-    res.status(200).json({ message: "Blog created successfully" });
+    return res.status(200).json({ message: "Blog created successfully" });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -39,10 +40,10 @@ const deleteBlog = async (req, res) => {
       return res.status(404).json({ message: "please login" });
     }
     await blogsModel.findByIdAndDelete(id);
-    res.status(200).json({ message: "Note deleted successfully" });
-    res.send("ok");
+    return res.status(200).json({ message: "Note deleted successfully" });
+    // res.send("ok");
   } catch (error) {
-    res.status(400).json({ message: "something went to wrong" });
+    return res.status(400).json({ message: "something went to wrong" });
   }
 };
 
@@ -53,36 +54,40 @@ const deleteallBlog = async (req, res) => {
   const { role } = req.user;
   // console.log(userRole);
   try {
-    if (role) {
+    if (role != admin) {
       return res.status(401).json({ message: "you are not authorized" });
     }
     await blogsModel.deleteMany();
-    res.status(200).json({ message: "all blogs deleted" });
-    res.send("ok");
+    return res.status(200).json({ message: "all blogs deleted" });
+    // res.send("ok");
   } catch (error) {
-    res.status(400).json({ message: error });
+    return res.status(400).json({ message: error });
   }
 };
 
 //getblogbyID
 const getBlogById = async (req, res) => {
+  console.log(req.user);
+  const { role } = req.user;
+  console.log(role);
   const { id } = req.params;
   const userid = req.user?._id;
   console.log(id, userid);
   try {
     const blogsdata = await blogsModel.find({
       userId: userid,
-      _id: id,
     });
-    console.log(blogsdata);
-    //   if (!blogsdata) {
-    //     return res.status(404).json({ message: "data not found" });
-    //   }
-    //   res
-    //     .status(200)
-    //     .json({ message: "All Notes fetched successfully", blogs: blogsdata });
+    // console.log(blogsdata);
+    // if (!blogsdata || blogsdata.length == 0) {
+    //   return res.status(404).json({ message: "data not found" });
+    // }
+    await blogsModel.find();
+    return res
+      .status(200)
+      .json({ message: "All Notes fetched successfully", blogs: blogsdata });
+    // res.send("ok");
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };
 
@@ -100,10 +105,10 @@ const updateBlog = async (req, res) => {
     }
     await blogsModel.findByIdAndUpdate(id, { ...req.body });
 
-    res.status(200).json({ message: "Note update successfully" });
+    return res.status(200).json({ message: "Note update successfully" });
     // res.send("ok");
   } catch (error) {
-    res.status(400).json({ message: "something went to wrong" });
+    return res.status(400).json({ message: "something went to wrong" });
   }
 };
 
@@ -116,12 +121,12 @@ const getAllBlogs = async (req, res) => {
       return res.status(404).json({ message: "data not found" });
     }
     await blogsModel.find();
-    res
+    return res
       .status(200)
       .json({ message: "All Notes fetched successfully", blogs: blogsdata });
-    res.send("ok");
+    // res.send("ok");
   } catch (error) {
-    res.status(400).json({ message: error });
+    return res.status(400).json({ message: error });
   }
 };
 

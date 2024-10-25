@@ -5,8 +5,10 @@ import Signup from "./signup";
 import Otp from "../components/otp";
 import Blogcreate from "./blogcreate";
 import Blogs from "./blogs";
-import Updateblogs from "./updateblogs";
-import Getblogbyadmin from "./getblogbyadmin";
+
+import AllBlogs from "./AllBlogs";
+import UpdateBlog from "../components/UpdateBlog";
+import PrivateRoutes from "../components/PrivateRoutes";
 
 const Allroutes = () => {
   return (
@@ -16,10 +18,31 @@ const Allroutes = () => {
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/register" element={<Signup />}></Route>
         <Route path="/otp" element={<Otp />}></Route>
-        <Route path="/createblogs" element={<Blogcreate />}></Route>
+        <Route
+          path="/createblogs"
+          element={
+            <PrivateRoutes>
+              <Blogcreate />
+            </PrivateRoutes>
+          }
+        ></Route>
         <Route path="/blogs" element={<Blogs />}></Route>
-        <Route path="/update/:id" element={<Updateblogs />}></Route>
-        <Route path="/allblogs" element={<Getblogbyadmin />}></Route>
+        <Route
+          path="/allblogs"
+          element={
+            <PrivateRoutes>
+              <AllBlogs />
+            </PrivateRoutes>
+          }
+        ></Route>
+        <Route
+          path="/update/:id"
+          element={
+            <PrivateRoutes>
+              <UpdateBlog />
+            </PrivateRoutes>
+          }
+        ></Route>
       </Routes>
     </div>
   );

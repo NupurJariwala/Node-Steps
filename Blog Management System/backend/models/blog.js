@@ -10,6 +10,7 @@ const BlogSchema = new mongoose.Schema({
     default: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
   },
   userId: String,
+  userName: String,
 });
 
 const blogsModel = mongoose.model("Blog", BlogSchema);

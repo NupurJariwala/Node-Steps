@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {
@@ -11,18 +12,17 @@ import {
   Row,
   Button,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 // import { useParams } from "react-router-dom";
 // import { Link, useParams } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
-const Blogs = () => {
+const AllBlogs = () => {
   const [data, setdata] = useState([]);
   const [err, seterr] = useState(false);
   const getdatafromdb = () => {
     axios
-      .get("http://localhost:8080/blogs/blog", {
+      .get("http://localhost:8080/blogs/allblogs", {
         withCredentials: true,
       })
       .then((res) => {
@@ -39,22 +39,28 @@ const Blogs = () => {
     getdatafromdb();
   }, [data]);
 
-  const handleDelete = (_id) => {
+  const handledelete = () => {
     axios
-      .delete(`http://localhost:8080/blogs/delete/${_id}`, {
+      .delete("http://localhost:8080/blogs/deleteall", {
         withCredentials: true,
       })
       .then((res) => {
-        alert(res.data?.message);
-        getdatafromdb();
+        alert(res.data.message);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return err ? (
     <h1>You are not authorized to access this resource.</h1>
   ) : (
     <div className="container mt-5">
+      <div>
+        <Button ariant="primary" className="ms-2 mb-5 " onClick={handledelete}>
+          DeleteAllBlogs
+        </Button>
+      </div>
       <Row>
         {data.map((blogs) => (
           <>
@@ -66,26 +72,11 @@ const Blogs = () => {
                   <CardText>Content : {blogs.content}</CardText>
                   <CardText>#Tags : {blogs.tags}</CardText>
                   <CardText>PublishedDate : {blogs.publishedDate}</CardText>
+                  <CardText>{blogs.publishedDate}</CardText>
                 </CardBody>
-                <div className="d-flex justify-content-end gap-3">
-                  {" "}
-                  <Button variant="success">
-                    <Link to={`/update/${blogs._id}`} className="text-light">
-                      Upadte
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(blogs._id)}
-                  >
-                    Delete
-                  </Button>
-                </div>
 
                 <CardFooter>
-                  <small className="text-muted text-primary">
-                    by {blogs.userName}
-                  </small>
+                  <small className="text-muted"> by {blogs.userName}</small>
                 </CardFooter>
               </Card>
             </Col>
@@ -96,4 +87,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default AllBlogs;

@@ -19,21 +19,6 @@ const NavigationBar = () => {
       });
   };
 
-  const handledelete = () => {
-    axios
-      .delete("http://localhost:8080/notes/deletebyadmin", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        alert(res.data.message);
-        navigate("/login");
-      })
-      .catch((err) => {
-        seterr(true);
-        console.log(err);
-      });
-  };
-
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -44,7 +29,6 @@ const NavigationBar = () => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/createblogs">create</Nav.Link>
             <Nav.Link href="/blogs">Blogs</Nav.Link>
-            <Nav.Link href="#contact">Contact</Nav.Link>
             <Nav.Link href="/allblogs">AllBlogs</Nav.Link>
             <Button variant="primary" className="ms-2">
               <Link style={{ color: "black" }} to={"/register"}>
@@ -58,9 +42,6 @@ const NavigationBar = () => {
             </Button>
             <Button variant="primary" onClick={handleclick} className="ms-2">
               Logout
-            </Button>
-            <Button ariant="primary" onClick={handledelete} className="ms-2">
-              DeleteAllBlogs
             </Button>
           </Nav>
         </Navbar.Collapse>

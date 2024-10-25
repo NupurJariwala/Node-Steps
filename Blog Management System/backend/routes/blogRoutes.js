@@ -9,15 +9,16 @@ const {
 } = require("../controllers/blogController");
 const roleValidator = require("../middleware/roleMiddleware");
 const Auth_middleware = require("../middleware/authMiddleware");
+const userValidator = require("../middleware/userMiddleware");
 
 const router = express.Router();
 //middleware
 router.use(Auth_middleware);
 // Get all blogs
-router.get("/allblogs", getAllBlogs);//admin
+router.get("/allblogs", roleValidator, getAllBlogs); //admin
 
 // Get a blog by ID
-router.get("/:id", getBlogById);
+router.get("/blog", userValidator, getBlogById);
 
 // Create a new blog
 router.post("/create", createBlog);
@@ -30,7 +31,5 @@ router.delete("/delete/:id", deleteBlog);
 
 // Delete by admin
 router.delete("/deleteall", deleteallBlog); //admin
-
-
 
 module.exports = router;

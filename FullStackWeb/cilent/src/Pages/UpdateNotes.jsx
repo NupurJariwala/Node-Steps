@@ -5,13 +5,12 @@ const baseurl = "http://localhost:8080";
 const UpdateNotes = () => {
   const [subject, setsubject] = useState("");
   const [description, setdescription] = useState("");
-  const id = { _id };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .patch(
-        `${baseurl}/notes/update/${id}`,
+        `${baseurl}/notes/update/:noteId`,
         { subject, description },
         { withCredentials: true }
       )
