@@ -5,7 +5,10 @@ const blogsSchema = new mongoose.Schema({
   author: { type: String },
   content: { type: String },
   tags: [String],
-  publishedDate: { type: Date, default: Date.now },
+  publishedDate: {
+    type: Date,
+    default: Date().toLocaleString("en-Us", { timeZone: "Asia/Kolkata" }),
+  },
 });
 const BlogModel = mongoose.model("blogs", blogsSchema);
 

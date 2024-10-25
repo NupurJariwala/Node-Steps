@@ -34,4 +34,16 @@ const AllBlogs = async (req, res) => {
   }
 };
 
-module.exports = { BlogsCreateController, AllBlogs };
+const BlogDetails = async (req, res) => {
+  // console.log(req.params)
+  const { id } = req.params;
+  try {
+    const data = await BlogsModel.find({ _id: id });
+    // console.log(data);
+    res.send(data);
+  } catch (error) {
+    res.status(400).json({ message: "something went to wrong" });
+  }
+};
+
+module.exports = { BlogsCreateController, AllBlogs, BlogDetails };

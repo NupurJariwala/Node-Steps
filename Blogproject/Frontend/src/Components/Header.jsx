@@ -8,7 +8,7 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/">Blogs</Nav.Link>
+            <Nav.Link href="/blogs">Blogs</Nav.Link>
             <Nav.Link href="/createblogs">CreateBlogs</Nav.Link>
             <Nav.Link href="/bloglist">BlogList</Nav.Link>
           </Nav>

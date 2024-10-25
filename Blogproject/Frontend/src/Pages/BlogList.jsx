@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const BlogList = () => {
   const [data, setdata] = useState([]);
@@ -22,7 +24,7 @@ const BlogList = () => {
   return (
     <div>
       <h3>BlogList</h3>
-      <table border="1px">
+      <Table border="1px" striped bordered hover style={{ width: "50%" }}>
         <thead>
           <tr>
             <th>Sno</th>
@@ -37,13 +39,17 @@ const BlogList = () => {
             <tr key={blog._id} data-testid="item">
               <td>{index + 1}</td>
               <td>{blog.userName}</td>
-              <td>{blog.title}</td>
+              <td>
+                <Link to={`http://localhost:8000/blogs/blogdetais/${blog._id}`}>
+                  {blog.title}
+                </Link>
+              </td>
               <td>{blog.author}</td>
               <td data-testid="category">{blog.publishedDate}</td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };
