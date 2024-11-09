@@ -40,7 +40,7 @@ const BlogsCreate = () => {
   };
   return (
     <div className="container mt-5">
-      <h2>Create a Note</h2>
+      <h2>Create a Blogs</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Name</label>

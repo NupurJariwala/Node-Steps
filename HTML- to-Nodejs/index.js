@@ -4,9 +4,9 @@ app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   //   res.send("<h1>Home Page</h1>"); //server side rendering
-  res.render("home");
-  n;
-  res.render("product");
+  res.render("about");
+
+  // res.render("product");
 });
 
 app.listen(8080, () => {

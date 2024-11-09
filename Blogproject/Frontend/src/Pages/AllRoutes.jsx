@@ -3,7 +3,7 @@ import BlogList from "./BlogList";
 import Blogs from "./Blogs";
 import BlogDetails from "./BlogDetails";
 import BlogsCreate from "./BlogCreate";
-import HomePage from "./HamePage";
+import HomePage from "./HomePage";
 
 const AllRoutes = () => {
   return (
