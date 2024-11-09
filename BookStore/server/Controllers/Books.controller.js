@@ -30,7 +30,9 @@ const AllBooks = async (req, res) => {
     if (!data || data.length == 0) {
       return res.status(404).json({ message: "data not found" });
     }
-    res.status(200).json({ message: "All Books fetched successfully" });
+    res
+      .status(200)
+      .json({ message: "All Books fetched successfully", books: data });
   } catch (error) {
     res.status(400).json({ message: "something went to wrong" });
   }

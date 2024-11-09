@@ -10,7 +10,7 @@ const booksSchema = new mongoose.Schema({
   author: { type: String },
   description: { type: String },
   tags: [String],
-  ISBN: { type: Number },
+  ISBN: { type: Number, unique: true },
   publishedDate: {
     type: String,
     default: new Date().toLocaleString(),

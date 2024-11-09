@@ -1,11 +1,9 @@
 import axios from "axios";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
-const BookCreate = () => {
+import { Link, useParams } from "react-router-dom";
+const BookUpadte = () => {
   const [userName, setuserName] = useState("");
   const [title, settitle] = useState("");
   const [author, setauthor] = useState("");
@@ -14,42 +12,22 @@ const BookCreate = () => {
   const [ISBN, setISBN] = useState("");
   const [price, setprice] = useState("");
   const [tags, settags] = useState([]);
+  const { id } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     axios
-      .post(
-        "http://localhost:8000/books/create",
-        {
-          userName,
-          title,
-          image,
-          author,
-          description,
-          tags,
-          ISBN,
-          price,
-        },
+      .put(
+        `http://localhost:8000/books/bookupdate/${id}`,
+        { userName, title, image, author, description, tags, ISBN, price },
         { withCredentials: true }
       )
       .then((res) => {
-        alert(res.data.message);
-        setuserName("");
-        settitle("");
-        setauthor("");
-        setdescription("");
-        settags([]);
-        setimage("");
-        setISBN("");
-        setprice("");
-
-        // console.log(res.data);
+        alert(res.data?.message);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
+
   return (
     <div className="container ">
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -142,11 +120,11 @@ const BookCreate = () => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Add Book
+          Update
         </button>
       </form>
     </div>
   );
 };
 
-export default BookCreate;
+export default BookUpadte;

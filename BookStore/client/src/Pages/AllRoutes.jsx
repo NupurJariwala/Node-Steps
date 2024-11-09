@@ -1,19 +1,20 @@
 import { Route, Routes } from "react-router-dom";
-import BlogList from "./BlogList";
-import Blogs from "./Blogs";
-import BlogDetails from "./BlogDetails";
-import BlogsCreate from "./BlogCreate";
-import HomePage from "./HamePage";
+import HomePage from "./HomePage";
+import Books from "./Books";
+import BookDetail from "./BookDetail";
+import BookCreate from "./BookCreate";
+import BookUpadte from "./BookUpdate";
 
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
-        <Route path="/bloglist" element={<BlogList />}></Route>
-        <Route path="/blogs" element={<Blogs />}></Route>
-        <Route path="/blogdetails" element={<BlogDetails />}></Route>
-        <Route path="/createblogs" element={<BlogsCreate />}></Route>
+
+        <Route path="/books" element={<Books />}></Route>
+        <Route path="/bookdetails/:id" element={<BookDetail />}></Route>
+        <Route path="/bookcreate" element={<BookCreate />}></Route>
+        <Route path="/bookupdate/:id" element={<BookUpadte />}></Route>
       </Routes>
     </div>
   );

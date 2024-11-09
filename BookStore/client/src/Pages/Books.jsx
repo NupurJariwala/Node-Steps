@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -8,17 +9,19 @@ import {
   CardTitle,
   Col,
   Row,
+  Button,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Books = () => {
   const [data, setdata] = useState([]);
 
   const getdatafromdb = () => {
     axios
-      .get("http://localhost:8000/blogs/allblogs")
+      .get("http://localhost:8000/books/allbooks")
       .then((res) => {
-        // console.log(res.data.blogs);
-        setdata(res.data.blogs);
+        // console.log(res.data);
+        setdata(res.data.books);
       })
       .catch((err) => {
         console.log(err);
@@ -28,22 +31,39 @@ const Books = () => {
   useEffect(() => {
     getdatafromdb();
   }, []);
+
   return (
-    <div className="container mt-5">
+    <div className="container ">
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button variant="light" text="primary">
+          <Link to={"/"}>Home page</Link>
+        </Button>
+      </div>
       <Row>
-        {data.map((blogs) => (
+        {data.map((books) => (
           <>
-            <Col key={blogs._id} md={4} className="mb-4">
+            <Col key={books._id} md={4}>
               <Card>
                 <CardBody>
-                  <CardTitle>Title : {blogs.title}</CardTitle>
-                  <CardText>Author : {blogs.author}</CardText>
-                  <CardText>Content : {blogs.content}</CardText>
-                  <CardText>PublishedDate : {blogs.publishedDate}</CardText>
+                  <CardTitle>Title : {books.title}</CardTitle>
+                  <Card.Img
+                    variant="top"
+                    src={books.image}
+                    height={200}
+                    width={200}
+                  />
+                  <CardText>Author : {books.author}</CardText>
+                  <CardText>Price : {books.price}/-</CardText>
+                  <CardText>PublishedDate : {books.publishedDate}</CardText>
                 </CardBody>
+                <div className="d-flex justify-content-between mb-2">
+                  <Button variant="light" text="primary">
+                    <Link to={`/bookdetails/${books._id}`}>Details</Link>
+                  </Button>
+                </div>
 
                 <CardFooter>
-                  <small className="text-muted">by:{blogs.userName}</small>
+                  <small className="text-muted">by:{books.userName}</small>
                 </CardFooter>
               </Card>
             </Col>
